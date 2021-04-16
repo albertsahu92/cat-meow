@@ -1,97 +1,189 @@
-
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.80.0">
-    <title>Cat-meow</title>
-
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="canonical" href="https://getbootstrap.com/docs/4.6/examples/album/">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <script src="js/bootstrap.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src=https://code.jquery.com/jquery-3.6.0.min.js></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://kit.fontawesome.com/f76dd613eb.js" crossorigin="anonymous"></script>
-    <!-- <script src="js/main.js"></script> --> <!-- kalau script disini null -->
-    
-    
-
-    <!-- Bootstrap core CSS -->
-<!-- <link href="css/bootstrap.min.css" rel="stylesheet" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous"> -->
-
-
-
-    <!-- Favicons -->
-
-
-
-    <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-      }
-
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-    </style>
-
-  </head>
-  <body>
-    
+    <title>Vue test</title>
+</head>
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
 <header>
-  <div class="navbar navbar-dark bg-dark shadow-sm">
-    <div class="container d-flex justify-content-between">
-      <a href="#" class="navbar-brand d-flex align-items-center">
-        <i class="fas fa-paw"></i>
-        <strong class="pl-1">Cat-meow</strong>
-      </a>
-      </div>
-  </div>
+        <div class="navbar navbar-dark bg-dark shadow-sm">
+          <div class="container d-flex justify-content-between">
+            <a href="#" class="navbar-brand d-flex align-items-center">
+              <i class="fas fa-paw"></i>
+              <strong class="pl-1">Cat-meow</strong>
+            </a>
+            </div>
+        </div>
 </header>
+<div id="app">
+    <v-app>
+        <v-main>
+            <v-container> 
+                <v-layout align-center justify-center>
+                <v-flex xs6>
+                    
+                        <div class="container">
+                          <h1 class=" text-center"><i class="fas fa-paw"></i> Cat-Meow</h1>
+                          <p class="lead text-muted text-center">This is a website for cat breeds by their Names! Choose the Breed names below!</p>
+                        </div>
+                    
+                    <v-autocomplete :items="breeds"
+                            item-text="name"
+                            v-model="selected_breed"
+                            label="Breeds"
+                            return-object
+                            attach></v-autocomplete>
+                </v-flex>
 
-<main role="main">
+                </v-layout>
 
-  <section class="jumbotron text-center">
-    <div class="container">
-      <h1>This is our first Project</h1>
-      <p class="lead text-muted">This is a website for cat breeds by their Regions! Choose the Region below!</p>
-      <select id = "selections" class="js-example-test form-control" name="state">
-        <option value ="AL">Alabama</option>
-          ...
-        <option value ="WY">Wyoming</option>
-      </select>
-    </div>
-  </section>
+                <v-layout>
+                    <v-flex xs12 sm8 offset-sm2>
+                        <v-card>
+                            <template>
+                                <v-row>
+                                    <v-col
+                                    v-for="(item,i) in images"
+                                    :key="i"
+                                    class="d-flex child-flex"
+                                    cols="4"
+                                    
+                                    >
+                                    <v-img
+                                        :src="item.url"
+                                        aspect-ratio="1"
+                                        class="grey lighten-2"
+                                    ><template v-slot:placeholder>
+                                        <v-row
+                                          class="fill-height ma-0"
+                                          align="center"
+                                          justify="center"
+                                        >
+                                          <v-progress-circular
+                                            indeterminate
+                                            color="grey lighten-5"
+                                          ></v-progress-circular>
+                                        </v-row>
+                                      </template>
+                                    </v-img>
 
-  
+                                    </v-col>
+                                </v-row>
+                            </template>
+                            <v-card-title primary-title>
+                                <div class="text-xs-center">
+                                    <v-chip>
+                                        <v-avatar>
+                                            <img :src="country_flag_url" :alt="selected_breed.country_code">
+                                        </v-avatar>
+                                        {{selected_breed.origin}}
+                                    </v-chip>
+                                    <v-chip v-if="selected_breed.experimental==1">Experimental</v-chip>
+                                    <v-chip v-if="selected_breed.rex==1">Rex</v-chip>
+                                    <v-chip v-if="selected_breed.natural==1">Natural</v-chip>
+                                    <v-chip v-if="selected_breed.rare==1">Rare</v-chip>
+                                    <v-chip v-if="selected_breed.hairless==1">Hairless</v-chip>
+                                    <v-chip v-if="selected_breed.suppressed_tail==1">Suppressed Tail</v-chip>
+                                    <v-chip v-if="selected_breed.short_legs==1">Short Legs</v-chip>
+                                    <v-chip v-if="selected_breed.hypoallergenic==1">Hypoallergenic</v-chip>
+                                </div>
+                                <div>
+                                    <h3 class="headline mb-0">{{selected_breed.name}}</h3>
+                                    <div>{{selected_breed.description}}</div>
+                                    <div>-----</div>
+                                    <div><i>{{selected_breed.temperament}}</i></div>
+                                </div>
+                            </v-card-title>
+                            <v-card-actions> 
+                                <v-btn :href="selected_breed.wikipedia_url" target="_blank" color="yellow"> Wikipedia</v-btn>
+                            </v-card-actions>
+                        </v-card>
+                    </v-flex>
+                </v-layout>
+            </v-container>
+        </v-main>
+    </v-app>
 
-</main>
+</div>
+    
+<script>
+    // var Breeds = $('#test').select2();
+    new Vue({
+        el: "#app",
+        vuetify: new Vuetify(),
+        data: {
+            country_flag_url:"",
+            images: [],
+            breeds: [],
+            selected_breed: {},
+            current_image: {}
+        },
+        created(){
+            this.getBreeds();
+        },
+        watch: {
+            selected_breed: function()
+            {
+                console.log(this.selected_breed)
 
-<footer class="text-muted">
-  <div class="container">
-    <p class="float-right">
-      <a href="#">Back to top</a>
-    </p>
-  </div>
-</footer>
+                let country_code = this.selected_breed.country_code.toLowerCase();
 
-<!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> -->
-<!-- <script>window.jQuery || document.write('<script src="/docs/4.6/assets/js/vendor/jquery.slim.min.js"><\/script>')</script><script src="js/bootstrap.bundle.min.js" crossorigin="anonymous"></script> -->
-<script src="js/main.js"></script> <!-- kalau script disini dapet elementnya -->
+                this.country_flag_url = `https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/flags/1x1/${country_code}.svg`;
+                this.getImages();
+            }
+        },
+        methods: {
 
+            async getBreeds()
+            {
+                try{
+                    axios.defaults.headers.common['x-api-key'] = "68c23a97-f4d6-4e0a-af11-db0777a269c5"
 
-      
-  </body>
+                    let resp = await axios.get('https://api.thecatapi.com/v1/breeds/')
+                    this.breeds = resp.data;
+                    console.log("--("+this.breeds.length+ ")Breeds from theCatAPI.com")
+
+                    this.selected_breed = this.breeds[10]
+                }
+                catch(err){
+                    console.log(err)
+                }
+            },
+            async getImages() 
+            {
+                try{
+                  
+                    let query_params = {
+                        breed_ids: this.selected_breed.id,
+                        limit:8
+                    }
+                    
+                    let resp = await axios.get('https://api.thecatapi.com/v1/images/search', {params: query_params});
+                    this.pagination_count = resp.headers['pagination-count'];
+                    this.images = resp.data
+                    this.current_image = this.images[0]
+
+                    console.log("-- ("+this.images.length +") Images from TheCatAPI.com")
+                    console.log( this.pagination_count ,'images available for this query.')
+
+                }catch(err){
+                    console.log(err)
+                }
+            }
+        }
+    })
+</script>
+</body>
 </html>
-
