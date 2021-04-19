@@ -12,7 +12,7 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://kit.fontawesome.com/f76dd613eb.js" crossorigin="anonymous"></script>
-    <title>Vue test</title>
+    <i class="fas fa-paw"></i>  <title> Cat-meow</title>
 </head>
 <body>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
@@ -22,7 +22,7 @@
           <div class="container d-flex justify-content-between">
             <a href="#" class="navbar-brand d-flex align-items-center">
               <i class="fas fa-paw"></i>
-              <strong class="pl-1">Cat-meow</strong>
+              <strong class="pl-1">Cat-Meow</strong>
             </a>
             </div>
         </div>
@@ -53,6 +53,7 @@
                     <v-flex xs12 sm8 offset-sm2>
                         <v-card>
                             <template>
+                                <v-hover>
                                 <v-row>
                                     <v-col
                                     v-for="(item,i) in images"
@@ -61,26 +62,33 @@
                                     cols="4"
                                     
                                     >
-                                    <v-img
-                                        :src="item.url"
-                                        aspect-ratio="1"
-                                        class="grey lighten-2"
-                                    ><template v-slot:placeholder>
-                                        <v-row
-                                          class="fill-height ma-0"
-                                          align="center"
-                                          justify="center"
-                                        >
-                                          <v-progress-circular
-                                            indeterminate
-                                            color="grey lighten-5"
-                                          ></v-progress-circular>
-                                        </v-row>
-                                      </template>
-                                    </v-img>
+                                   <v-hover v-slot="{ hover }">
+                                       <v-card
+                                        :elevation="hover ? 12 : 2"
+                                        :class="{'on-hover': hover}"
+                                       >
+                                        <v-img
+                                            :src="item.url"
+                                            aspect-ratio="1"
+                                            class="grey lighten-2"
+                                        ><template v-slot:placeholder>
+                                            <v-row
+                                            class="fill-height ma-0"
+                                            align="center"
+                                            justify="center"
+                                            >
+                                            <v-progress-circular
+                                                indeterminate
+                                                color="grey lighten-5"
+                                            ></v-progress-circular>
+                                            </v-row>
+                                        </template>
+                                        </v-img>
+                                    </v-hover>
 
                                     </v-col>
                                 </v-row>
+                            
                             </template>
                             <v-card-title primary-title>
                                 <div class="text-xs-center">
